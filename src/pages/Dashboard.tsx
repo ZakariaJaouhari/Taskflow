@@ -3,6 +3,7 @@ import { useAuth } from '../features/auth/AuthContext';
 import api from '../api/axios';
 import axios from 'axios';
 import Header from '../components/Header';
+import HeaderMUI from '../components/HeaderMUI';
 import Sidebar from '../components/Sidebar';
 import MainContent from '../components/MainContent';
 import ProjectForm from '../components/ProjectForm';
