@@ -1,14 +1,17 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store';
+import { logout } from '../features/auth/authSlice';
 import styles from './Header.module.css'; 
   
-// Modifier l'interface HeaderProps : 
 interface HeaderProps { 
   title: string; 
   onMenuClick: () => void; 
-  userName?: string; 
-  onLogout?: () => void; 
 } 
   
-export default function Header({ title, onMenuClick, userName, onLogout }: HeaderProps) { 
+export default function Header({ title, onMenuClick }: HeaderProps) { 
+  const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((state: RootState) => state.auth);
+
   return ( 
     <header className={styles.header}> 
       <div className={styles.left}> 
@@ -16,9 +19,9 @@ export default function Header({ title, onMenuClick, userName, onLogout }: Heade
         <h1 className={styles.logo}>{title}</h1> 
       </div> 
       <div className={styles.right}> 
-        {userName && <span className={styles.userName}>{userName}</span>} 
-        {onLogout && ( 
-          <button className={styles.logoutBtn} onClick={onLogout}> 
+        {user?.name && <span className={styles.userName}>{user.name}</span>} 
+        {user && ( 
+          <button className={styles.logoutBtn} onClick={() => dispatch(logout())}> 
             Déconnexion 
           </button> 
         )} 

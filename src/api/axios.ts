@@ -4,4 +4,13 @@ const api = axios.create({
  headers: { 'Content-Type': 'application/json' },
  timeout: 5000,
 });
+
+export function setAuthToken(token: string | null) {
+  if (token) {
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete api.defaults.headers.common['Authorization'];
+  }
+}
+
 export default api;
